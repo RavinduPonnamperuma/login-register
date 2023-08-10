@@ -1,0 +1,43 @@
+<div>
+    <div class=" w-1/2 pt-4 mr-auto ml-auto pb-5">
+        
+        <div class="">
+            <form  (ngSubmit)="loginUser()" class="ml-[10vw] mr-[10vw] border-2 p-4 rounded-lg drop-shadow-xl">
+                <div class="pb-4" >
+                    <h3 class="text-2xl text-red-600 text-center ">Login</h3>
+                </div>
+                <div class="pb-5">
+                    <img src="assets/img/login.png" alt="" class="h-[10vw] w-[10vw] mr-auto ml-auto drop-shadow-xl">
+                </div>
+                <div class="pb-4">
+                    <label for="Email1" class="pb-2 pl-5">Email address</label><br>
+                    <input type="email" class="border-solid border-2 w-full  h-10 rounded-full text-center drop-shadow-xl" formControlName="email" placeholder="Enter your Email" required="required" >
+                </div>
+                <div class="pb-5">
+                    <label for="Password" class="pb-2 pl-5">Password</label><br>
+                    <input type="password" class="border-solid border-2 w-full h-10 rounded-full text-center drop-shadow-xl" formControlName="password" placeholder="Enter your Password" required="required">
+                </div>
+              
+                <div class="pb-3">
+                    <button type="submit" class="border-solid border-2 bg-sky-600   text-white h-12 rounded-full w-1/2  drop-shadow-xl" >Login</button>
+                    <button type="clear" class="border-solid border-2 bg-red-600 text-white h-12 rounded-full w-1/2 drop-shadow-xl" >Clear</button>
+
+                </div>
+                <div class="pl-5">
+                    <p class="pb-2">Forget your password ?<a href="" class="text-red-700"> click</a></p>
+                    <p>Register now<a href="" class="text-red-700"> click</a></p>
+                </div>
+                <div class="">
+                    <p class="text-slate-400 text-end">&copy; 2023 Maxim IT</p>
+                </div>
+                
+    
+            </form>
+
+        </div>
+        
+
+    </div>
+ 
+
+</div>
