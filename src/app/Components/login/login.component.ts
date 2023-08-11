@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +6,8 @@ import { FormControl, FormGroup,Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm=new FormGroup({
-    email:new FormControl('ravindu'),
-    pasword:new FormControl('123')
-  })
-  loginUser(){
-    console.warn(this.loginForm.value)
-  }
+ Submit(){
+  console.log("Form Submited ")
+ }
 
 }
