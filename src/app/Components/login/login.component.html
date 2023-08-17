@@ -1,8 +1,12 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 <div>
     <div class=" w-1/2 pt-4 mr-auto ml-auto pb-5">
         
         <div class="">
-            <form class="ml-[10vw] mr-[10vw] border-2 p-4 rounded-lg drop-shadow-xl">
+            <form [formGroup]="loginForm"   class="ml-[10vw] mr-[10vw] border-2 p-4 rounded-lg drop-shadow-xl">
                 <div class="pb-4" >
                     <h3 class="text-2xl text-red-600 text-center font-semibold">Login</h3>
                 </div>
@@ -11,11 +15,19 @@
                 </div>
                 <div class="pb-4">
                     <label for="Email1" class="pb-2 pl-5 font-medium">Email address</label><br>
-                    <input type="email" class="border-solid border-2 w-full  h-10 rounded-full text-center drop-shadow-xl" formControlName="email" placeholder="Enter your Email" required="required" >
+                    <input type="email" class="border-solid border-2 w-full  h-10 rounded-lg text-center drop-shadow-xl" formControlName="email" placeholder="Enter your Email" required="required" name="email" id="email"> 
+                    <span class="error">email is required</span>
+                    <!-- *ngIf="email.invalid && email.touched" -->
                 </div>
                 <div class="pb-5">
                     <label for="Password" class="pb-2 pl-5 font-medium">Password</label><br>
-                    <input type="password" class="border-solid border-2 w-full h-10 rounded-full text-center drop-shadow-xl" formControlName="password" placeholder="Enter your Password" required="required">
+                    <input [type]="password" class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl" formControlName="password" placeholder="Enter your Password" required="required">
+                    <div class=" text-end pr-5 pb-1">
+                        <button type="button" (click)="onClick()" value="show_password">
+                            <i class="fa fa-eye " aria-hidden="true" *ngIf="!show"></i>
+                            <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                          </button>
+                    </div>
                 </div>
               
                 <div class="pb-3 lg:flex flex-row">
@@ -23,8 +35,8 @@
                         <button type="submit" class="font-medium border-solid border-2 bg-blue-800   text-white h-12 rounded-full w-full  drop-shadow-xl hover:bg-blue-500" >Login</button>
                     </div>
                     <div class="w-1/2">
-                        <button type="clear" class="font-medium border-solid border-2 bg-red-800 text-white h-12 rounded-full w-full drop-shadow-xl hover:bg-red-500" >Clear</button>
-                    </div>   
+                        <input type="reset" value="Clear" class="font-medium border-solid border-2 bg-red-800 text-white h-12 rounded-full w-full drop-shadow-xl hover:bg-red-500"> 
+                    </div>
                 </div>
 
                 <div class="pl-5">

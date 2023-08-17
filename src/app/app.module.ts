@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import {  RouterModule, Routes } from '@angular/router';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRouts: Routes = [
   {path: '',component:LoginComponent},
@@ -16,14 +17,16 @@ const appRouts: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
-  
-  
+    RegisterComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRouts)
+    RouterModule.forRoot(appRouts),
+    ReactiveFormsModule,
+    FormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
