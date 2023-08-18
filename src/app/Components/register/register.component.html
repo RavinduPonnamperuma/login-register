@@ -6,71 +6,112 @@
         <div class>
             <form
                 class="ml-[10vw] mr-[10vw] border-2 p-2 rounded-lg drop-shadow-xl"
-                [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                [formGroup]="registerForm"
+                (ngSubmit)="onSubmit()">
 
                 <div class="pb-4">
                     <h3
                         class="text-2xl text-green-800 text-center font-semibold ">Register</h3>
                 </div>
-                <!-- <div class="pb-5">
-                    <img src="assets/img/login.png" alt="" class="h-[10vw] w-[10vw] mr-auto ml-auto drop-shadow-xl">
-                </div> -->
+
                 <div class="pb-2 lg:flex flex-row ">
                     <div class="w-1/2">
                         <label for="Name" class="pb-2 pl-5 font-medium">First
-                            Name</label><br>
+                            Name<span class="text-danger"> *</span></label><br>
+
                         <input type="text"
                             class="border-solid border-2 w-full   h-10 rounded-lg text-center drop-shadow-xl"
-                            formControlName="username"
+                            formControlName="firstname"
                             placeholder="Enter your First Name"
                             required="required" value
-                            name="username">
-                            <!-- <div class="err" *ngIf="submitted && f.username.errors" >
-                                <div *ngIf="f.username.errors.required"></div>
+                            name="firstname" id="firstname"
+                            [(ngModel)]="register.firstname">
 
-                            </div> -->
+                        <div class="form-text  text-danger"
+                            *ngIf="Lastname.errors?.['required']  && (Lastname.touched|| Lastname.dirty)">
+                            First Name is Required.
+                        </div>
 
-                             
                     </div>
                     <div class="w-1/2">
-                        <label for="l_Name" class="pb-2 pl-5 font-medium">Last
-                            Name</label><br>
+                        <label for="Lastname" class="pb-2 pl-5 font-medium">Last
+                            Name<span class="text-danger"> *</span></label><br>
+
                         <input type="text"
                             class="border-solid border-2 w-full   h-10 rounded-lg text-center drop-shadow-xl"
-                            formControlName="l_name"
+                            formControlName="lastname"
                             placeholder="Enter your Last Name"
-                            required="required" value>
+                            required="required" value
+                            name="lastname" id="lastname"
+                            [(ngModel)]="register.lastname">
+                        <div class="form-text  text-danger"
+                            *ngIf="Firstname.errors?.['required']  && (Firstname.touched|| Firstname.dirty)">
+                            Lasat Name is Required.
+                        </div>
+
                     </div>
+                </div>
+                <div class="pb-2">
+                    <label for="Nic" class="pb-2 pl-5 font-medium">NIC
+                        <span class="text-danger"> *</span></label><br>
+                    <input type="text"
+                        class="border-solid border-2 w-full  h-10 rounded-lg text-center drop-shadow-xl"
+                        formControlName="nic" placeholder="Enter your Nic"
+                        required="required" value name="nic" id="nic"
+                        [(ngModel)]="register.nic">
+                    <div class="form-text  text-danger"
+                        *ngIf="NIC.errors?.['required'] && (NIC.touched|| NIC.dirty)">
+                        Nic is Required.
+                    </div>
+                    <div class="form-text  text-danger"
+                        *ngIf="NIC.errors?.['pattern'] && (NIC.touched|| NIC.dirty)">
+                        Nic is Invalid.
+                    </div>
+
                 </div>
                 <div class="pb-2">
                     <label for="Email1" class="pb-2 pl-5 font-medium">Email
-                        address</label><br>
+                        address<span class="text-danger"> *</span></label><br>
                     <input type="email"
                         class="border-solid border-2 w-full  h-10 rounded-lg text-center drop-shadow-xl"
                         formControlName="email" placeholder="Enter your Email"
-                        required="required" value>
+                        required="required" value name="email"
+                        id="email" [(ngModel)]="register.email">
+                    <div class="form-text  text-danger"
+                        *ngIf="Email.errors?.['email']  &&  (Email.touched|| Email.dirty)">
+                        Email is Required.
+                    </div>
                 </div>
                 <div class="pb-2">
-                    <label for="Password" class="pb-2 pl-5 font-medium">Password</label><br>
-                    <input [type]="password"
-                        name="password"
+                    <label for="Password" class="pb-2 pl-5 font-medium">Password<span
+                            class="text-danger">
+                            *</span></label><br>
+                    <input [type]="password" name="password"
                         class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl"
                         formControlName="password"
                         placeholder="Enter your Password" required="required"
                         value>
-                       
+
                 </div>
                 <div class>
-                    <label for="c_Password" class="pb-2 pl-5 font-medium">Confirm Password</label><br>
-                    <input [type]="password"
-                        name="C_password"
+                    <label for="c_Password" class="pb-2 pl-5 font-medium">Confirm
+                        Password<span class="text-danger"> *</span></label><br>
+                    <input [type]="password" name="C_password"
+                        (input)="matchPassword()"
                         class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl"
                         formControlName="C_password"
                         placeholder="Enter your Confirm Password"
                         required="required"
                         value>
+                    <div class="text-red-700" *ngIf="passwordError">
+                        Password did not match
+                    </div>
 
                 </div>
+
+                <!-- <div class="text-red-700" *ngIf="this.registerForm.value.password!=this.registerForm.value.C_password">
+                    password did not match
+                </div> -->
                 <div class=" text-end pr-5 pb-1">
                     <button type="button" (click)="onClick1()"
                         value="show_password">
@@ -80,33 +121,48 @@
                     </button>
                 </div>
                 <div class="pb-2">
-                    <label for="address" class="pb-2 pl-5 font-medium">Address</label><br>
+                    <label for="address" class="pb-2 pl-5 font-medium">Address<span
+                            class="text-danger">
+                            *</span></label><br>
                     <input type="text"
                         class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl"
                         formControlName="address"
                         placeholder="Enter your Address" required="required"
-                        value>
+                        value
+                        name="address" id="address"
+                        [(ngModel)]="register.address">
+                    <div class="form-text  text-danger"
+                        *ngIf="Address.errors?.['required']  &&  (Address.touched|| Address.dirty)">
+                        Address is Required.
+                    </div>
 
                 </div>
                 <div class="pb-4">
-                    <label for="tp" class="pb-2 pl-5 font-medium">Phone number</label><br>
+                    <label for="tp" class="pb-2 pl-5 font-medium">Phone number<span
+                            class="text-danger">
+                            *</span></label><br>
                     <input type="text"
                         class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl"
-                        formControlName="Tp_number"
+                        formControlName="tpNumber"
                         placeholder="Enter your Phone Number"
-                        required="required" value>
+                        required="required" value
+                        name="tpNumber" id="tpNumber"
+                        [(ngModel)]="register.tpNumber" maxlength="10"
+                        minlength="10">
+                    <div class="form-text  text-danger"
+                        *ngIf="TpNumber.errors?.['required']  &&  (TpNumber.touched|| TpNumber.dirty)">
+                        Phone number is Required.
+                    </div>
+                    <div class="form-text  text-danger"
+                        *ngIf="TpNumber.errors?.['pattern'] && (TpNumber.touched|| TpNumber.dirty)">
+                        Phone number is Invalid.
+                    </div>
+                    <div class="form-text  text-danger"
+                        *ngIf="TpNumber.errors?.['minlength'] && (TpNumber.touched|| TpNumber.dirty)">
+                        Phone number is Invalid.
+                    </div>
 
                 </div>
-                <!-- <div class="pb-4">
-                    <label for="tp" class="pb-2 pl-5 font-medium">Role</label><br>
-                    <select  name="role" id="gender" class="border-solid border-2 w-full h-10 rounded-lg text-center drop-shadow-xl" >
-                        <option value="type1">Type1</option>
-                        <option value="type2">Type2</option>
-                        <option value="type3">Type3</option>
-
-                    </select>
-
-                </div> -->
 
                 <div class="pb-3 lg:flex flex-row">
                     <div class="w-1/2">
